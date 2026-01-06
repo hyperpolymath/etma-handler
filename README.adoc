@@ -1,0 +1,67 @@
+can you change this to a README adoc and make it utter best practice - the credit to Mike and minimisation of my role, and the highlighting mine is not official and currently has data integrity issues is important here # OU eTMA File Handler
+
+Original design by Mike Hayes, available at https://www.hayfamily.co.uk/etmahandlerpage.html
+Mike's is the production edition and official-unofficial eTMA by the University.
+
+This is a work-in-progress. It does not involve any substantive code alteration (yet I still broke it :/).
+There are problems with the the handling of data that leads to corruption of data at this time., that does not occur (to my knowledge) in the original
+
+The chanages I have made here -
+
+a) rearranging the directory structure to declutter the root, and separate out users and developers
+b) replacement of the following components
+  i) Virtual Machine with Temurin 25 with 32/64 support and asdf updating
+  ii) 
+  iii)
+  iv)
+  v)
+c) switching to cross-platform scripting. The original used dedicated scripts meaning separate versions were required
+d) support for 32/64bit processors
+e) extended accessibility support (latest accessible pdf format, braille, high contrast text,...
+f) a single entry script with menu that allows for install, running in site as portable, check for and (and optional install)
+
+Though this probably sounds like a lot of changes, most of these are opportunities are created simply in replacement of old components with different ones (newer standards, extended functionality), e.g.
+
+a) PDFs have seen immense pressure to improve accessibility
+b) adoc support for documentation is near universal
+c) 
+
+It is simply to remove the older VM and dependencies and replace with more up-to-date technologies.
+
+It MUST NOT be used for actual assignment handling at this time - comments, however, for its development are much welcomed.
+
+Open University eTMA (electronic Tutor-Marked Assignment) handler for tutors.
+
+## Quick Start
+
+**Double-click to run:**
+```
+./etmaHandler.sh
+```
+
+## What's What
+
+| File/Folder | Purpose |
+|-------------|---------|
+| `etmaHandler.sh` | **Main launcher** - run this |
+| `install.sh` | Creates desktop shortcut |
+| `browser-auth-workaround.sh` | Use if login fails (opens browser first) |
+| `modernized/` | Updated Java 25 + Jakarta EE version |
+| `dist/` | Legacy version (old Java) |
+| `etmaDictionary.dic` | Spell checker dictionary |
+
+## Troubleshooting
+
+### "Login failed" or SAML errors
+Run `./browser-auth-workaround.sh` - this opens the browser to authenticate first, then launches the app.
+
+### Java not found
+Ensure Java is installed. The handler uses:
+1. asdf-managed Temurin 25 (preferred)
+2. Bundled JRE in `dist/jre/` (fallback)
+
+### Window doesn't appear
+Check if already running: `pgrep -f etmaHandler`
+
+Original Licence MIT
+Current Licence MIT + Palimpsest 0.4
