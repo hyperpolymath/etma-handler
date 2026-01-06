@@ -1,67 +1,184 @@
-can you change this to a README adoc and make it utter best practice - the credit to Mike and minimisation of my role, and the highlighting mine is not official and currently has data integrity issues is important here # OU eTMA File Handler
+= OU eTMA File Handler (Unofficial Fork)
+:toc:
+:toclevels: 3
+:sectnums:
+:icons: font
+:source-highlighter: rouge
+:repo-url: https://github.com/
+<OWNER>/<REPO>
+:upstream-url: https://www.hayfamily.co.uk/etmahandlerpage.html
 
-Original design by Mike Hayes, available at https://www.hayfamily.co.uk/etmahandlerpage.html
-Mike's is the production edition and official-unofficial eTMA by the University.
+IMPORTANT: Do not use this fork for real assignment handling. This repository is a work-in-progress and currently has known data integrity issues that can corrupt data. Use the upstream (Mike Hayes’) edition for production use.
 
-This is a work-in-progress. It does not involve any substantive code alteration (yet I still broke it :/).
-There are problems with the the handling of data that leads to corruption of data at this time., that does not occur (to my knowledge) in the original
+== What this is
 
-The chanages I have made here -
+The Open University eTMA (electronic Tutor-Marked Assignment) handler is a tool for OU tutors.
 
-a) rearranging the directory structure to declutter the root, and separate out users and developers
-b) replacement of the following components
-  i) Virtual Machine with Temurin 25 with 32/64 support and asdf updating
-  ii) 
-  iii)
-  iv)
-  v)
-c) switching to cross-platform scripting. The original used dedicated scripts meaning separate versions were required
-d) support for 32/64bit processors
-e) extended accessibility support (latest accessible pdf format, braille, high contrast text,...
-f) a single entry script with menu that allows for install, running in site as portable, check for and (and optional install)
+This repository is an unofficial fork intended for modernization and experimentation (tooling, packaging, documentation, accessibility, cross-platform scripting). It is not the official or production edition.
 
-Though this probably sounds like a lot of changes, most of these are opportunities are created simply in replacement of old components with different ones (newer standards, extended functionality), e.g.
+== Credit and upstream
 
-a) PDFs have seen immense pressure to improve accessibility
-b) adoc support for documentation is near universal
-c) 
+Original design and upstream implementation: Mike Hayes +
+Upstream page: {upstream-url}
 
-It is simply to remove the older VM and dependencies and replace with more up-to-date technologies.
+Mike’s edition is the de facto “official-unofficial” production handler used by many tutors. If you need a dependable tool, use upstream.
 
-It MUST NOT be used for actual assignment handling at this time - comments, however, for its development are much welcomed.
+== Status: not production-ready
 
-Open University eTMA (electronic Tutor-Marked Assignment) handler for tutors.
+This fork currently has data handling problems that can lead to corruption of data. I believe this issue does not exist in the upstream version, but I have not completed a full comparative audit.
 
-## Quick Start
+Therefore:
 
-**Double-click to run:**
-```
+✅ Feedback and contributions are welcome.
+
+❌ Do not use this fork for real eTMA/assignment handling.
+
+== Goals of this fork (minimal code change, maximum modernization)
+
+Although the intent is not to rewrite the application logic, this fork aims to modernize the surrounding “platform” pieces:
+
+Directory structure changes to declutter the repository root and separate user vs developer concerns.
+
+Component replacement / refresh (primarily packaging/tooling rather than logic changes):
+** Java VM: migrate to Eclipse Temurin 25 with asdf support and 32/64-bit coverage.
+** (Other replacements are tracked in the roadmap/TODO; see <<Roadmap>>.)
+
+Cross-platform scripting (reduce OS-specific script duplication).
+
+Explicit support for 32-bit and 64-bit processors where feasible.
+
+Improved accessibility outputs (e.g., current accessible PDF formats, braille-friendly outputs, high-contrast considerations).
+
+Single entry script with a simple menu for:
+** install
+** run (including “portable” mode)
+** check for updates (and optionally install them)
+
+Most of the above are “surface” upgrades (dependencies, packaging, docs, standards) rather than deep logic changes.
+
+== Quick start
+
+.Run from the repository directory
+[source,shell]
 ./etmaHandler.sh
-```
 
-## What's What
+TIP: On some systems you may need to mark scripts executable first: chmod +x etmaHandler.sh install.sh browser-auth-workaround.sh
 
-| File/Folder | Purpose |
-|-------------|---------|
-| `etmaHandler.sh` | **Main launcher** - run this |
-| `install.sh` | Creates desktop shortcut |
-| `browser-auth-workaround.sh` | Use if login fails (opens browser first) |
-| `modernized/` | Updated Java 25 + Jakarta EE version |
-| `dist/` | Legacy version (old Java) |
-| `etmaDictionary.dic` | Spell checker dictionary |
+== Repository layout
 
-## Troubleshooting
+[cols="1,3",options="header"]
+|===
+|Path |Purpose
 
-### "Login failed" or SAML errors
-Run `./browser-auth-workaround.sh` - this opens the browser to authenticate first, then launches the app.
+|etmaHandler.sh
+|Main launcher — start here.
 
-### Java not found
-Ensure Java is installed. The handler uses:
-1. asdf-managed Temurin 25 (preferred)
-2. Bundled JRE in `dist/jre/` (fallback)
+|install.sh
+|Creates desktop shortcut / install integration.
 
-### Window doesn't appear
-Check if already running: `pgrep -f etmaHandler`
+|browser-auth-workaround.sh
+|Use if login/authentication fails (opens browser first, then launches).
 
-Original Licence MIT
-Current Licence MIT + Palimpsest 0.4
+|modernized/
+|Modernized build (e.g., Java 25 + Jakarta EE target).
+
+|dist/
+|Legacy build artifacts and/or older Java layout (fallback/compat).
+
+|dist/jre/
+|Bundled JRE fallback (if present).
+
+|etmaDictionary.dic
+|Spell checker dictionary.
+|===
+
+== Troubleshooting
+
+=== Login failed / SAML errors
+
+Run:
+
+[source,shell]
+./browser-auth-workaround.sh
+
+This opens the browser to authenticate first, then launches the handler.
+
+=== Java not found
+
+This fork prefers:
+
+. asdf-managed Temurin 25
+. Bundled JRE in dist/jre/ (if present) as a fallback
+
+Confirm Java is available:
+
+[source,shell]
+java -version
+
+=== Window doesn’t appear
+
+Check if it’s already running:
+
+[source,shell]
+pgrep -f etmaHandler
+
+== Safety and data integrity
+
+WARNING: This fork has known data integrity issues and may corrupt data. Until this is resolved, treat the tool as unsafe for real eTMA workflows.
+
+If you can help:
+
+provide reproducible steps,
+
+share redacted sample inputs,
+
+or help create regression tests that compare behavior against upstream,
+
+…that would be extremely valuable.
+
+== Contributing
+
+Contributions are welcome, especially those that improve correctness, reproducibility, and cross-platform safety.
+
+Suggested priorities:
+
+. Reproduce and isolate the data corruption issue(s).
+. Add regression tests or fixtures to prevent recurrence.
+. Compare critical workflows against upstream to ensure parity.
+. Only then proceed with further modernization.
+
+=== Development principles for this fork
+
+Upstream-first mindset: prefer changes that can be proposed upstream, or at least remain compatible.
+
+Minimize logic changes: focus on packaging/tooling unless correctness requires otherwise.
+
+Be explicit about risk: if behavior changes, document it.
+
+== Roadmap
+
+Data integrity fixes are the top priority. Modernization work is secondary until corruption risks are eliminated.
+
+Planned/ongoing items (high-level):
+
+Identify and fix data corruption pathways
+
+Fill in the component replacement list (items ii–v) with concrete details
+
+Cross-platform scripting consolidation
+
+Accessibility improvements audit + outputs
+
+Update mechanism (safe + optional)
+
+== Licence
+
+Upstream licence: MIT (per upstream)
+
+This fork: MIT + Palimpsest 0.4 (as currently stated)
+
+NOTE: If there is any discrepancy between licence files and this README, the licence files should be treated as authoritative.
+
+== Disclaimer
+
+This repository is not affiliated with or endorsed by The Open University. It is a personal, unofficial fork intended for experimentation and modernization, and it is currently not safe for production use due to data integrity issues.
