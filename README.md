@@ -1,5 +1,10 @@
 # OU eTMA File Handler
 
+Original design by Mike Hayes, available at https://www.hayfamily.co.uk/etmahandlerpage.html
+Mike's is the production edition and official-unofficial eTMA by the University.
+
+This is a work-in-progress and should NOT be used for actual assignment handling at this time - comments, however, for its development are much welcomed.
+
 Open University eTMA (electronic Tutor-Marked Assignment) handler for tutors.
 
 ## Quick Start
@@ -46,3 +51,6 @@ Check if already running: `pgrep -f etmaHandler`
 | `etmaHandlerJ/` | Decompiled source (for reference) |
 | `Installer/` | Old installer scripts |
 | `*.pdf`, `*.rtf` | Legacy documentation |
+
+
+Original Licence MIT
