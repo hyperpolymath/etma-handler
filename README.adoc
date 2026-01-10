@@ -1,4 +1,9 @@
+image:https://img.shields.io/badge/license-PMPL--1.0-blue.svg[License,link="https://github.com/hyperpolymath/palimpsest-license"]
+
 = OU eTMA File Handler (Unofficial Fork)
+
+
+
 :toc:
 :toclevels: 3
 :sectnums:
@@ -173,9 +178,9 @@ Update mechanism (safe + optional)
 
 == Licence
 
-Upstream licence: MIT (per upstream)
+Upstream licence: PMPL-1.0 (per upstream)
 
-This fork: MIT + Palimpsest 0.4 (as currently stated)
+This fork: PMPL-1.0 + Palimpsest 0.4 (as currently stated)
 
 NOTE: If there is any discrepancy between licence files and this README, the licence files should be treated as authoritative.
 
